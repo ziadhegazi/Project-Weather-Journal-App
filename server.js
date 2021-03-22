@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.static("Website"));
 
 //Local server
-const port = 8080;
+const port = 8000;
 const server = app.listen(port, () => {
     console.log("server running",
                 `running on local host: ${port}`);
@@ -32,11 +32,11 @@ projectData = {};
 app.get("/all", getProjectData);
 
 function getProjectData(request,response) {
-    response.send(projectData);
-    console.log(projectData);
+    response.send(weatherData);
+    console.log(weatherData);
 }
 
-
+const weatherData = [];
 // POST route
 app.post("/addData", addProjectData);
 
@@ -47,6 +47,6 @@ function addProjectData(request, response) {
         feelings: request.body.feelings
     }
 
-    projectData.push(newEntry);
-    response.send(projectData);
+    weatherData.push(newEntry);
+    response.send(weatherData);
 }

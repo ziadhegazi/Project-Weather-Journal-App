@@ -1,5 +1,5 @@
 //baseURL
-const baseURL = "api.openweathermap.org/data/2.5/weather?zip=";
+const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
 //API Key
 const apiKey = "dd729811ce6821424a00b8b1c99e5884";
 
@@ -18,7 +18,10 @@ function performAction(e) {
     console.log(newDate);
     getData(baseURL, zipcode, apiKey)
     .then(function(data) {
-        postData("/addData", {temp: data.body.temp, date: newDate, feelings: feelings})
+        postData("/addData", {
+            temp: data.main.temp, 
+            date: newDate,
+            feelings: feelings})
         .then(function() {
             updateUI();
         })
@@ -69,9 +72,9 @@ const updateUI = async () => {
     try {
         const allData = await request.json();
         // adding data to div
-        document.querySelector("#date").innerHTML = allData.date;
-        document.querySelector("#temp").innerHTML = allData.temp;
-        document.querySelector("content").innerHTML = allData.feelings;
+        document.querySelector("#date").innerHTML = allData[0].date;
+        document.querySelector("#temp").innerHTML = allData[0].temp;
+        document.querySelector("#content").innerHTML = allData[0].feelings;
     }
     catch(error) {
         console.log("Error", error);

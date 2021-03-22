@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 //baseURL
 const baseURL = "api.openweathermap.org/data/2.5/weather?zip=";
 //API Key
@@ -13,15 +11,14 @@ let newDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
 //Detecting button pressed
 document.querySelector("#generate").addEventListener("click", performAction);
 
-function performAction(event) {
+function performAction(e) {
     //Zipcode user entered
     const zipcode = document.querySelector("#zip").value;
-    const feelings = document.querySelector("#feelings");
+    const feelings = document.querySelector("#feelings").value;
     console.log(newDate);
     getData(baseURL, zipcode, apiKey)
     .then(function(data) {
-        postData("/addData", {temp: data.body.temp, date: data.body.date, feelings: data.body,feelings})
-
+        postData("/addData", {temp: data.body.temp, date: newDate, feelings: feelings})
         .then(function() {
             updateUI();
         })
@@ -33,8 +30,8 @@ function performAction(event) {
 const getData = async (url, zipcode, key) => {
     //call API
     const countryCode = document.querySelector("#countryCode").value;
-    const res = await fetch(`${url}${zipcode},${countryCode}&appid=${key}`);
-    console.log(response);
+    const res = await fetch(`${url}${zipcode},${countryCode}&APPID=${key}`)
+    console.log(res);
 
     try {
         //converting data into json format

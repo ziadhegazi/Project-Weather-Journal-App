@@ -8,12 +8,38 @@ body{
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
     height:min-content;
-    background: #f23557;
+    background:linear-gradient( 50deg,
+        #c92e4a,
+        #ac1f88,
+        #951b99,        
+        #851ca5,
+        #5f23cf,
+        #4322b9,
+        #2826c9,
+        #2245b9,
+        #1b8da1,
+        #23cf7f,
+        #1da71d
+    ) ;
+    animation: movinggradient 7s ease infinite;
+    background-size: 200%;
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+}
+
+@keyframes movinggradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 

@@ -4,6 +4,7 @@ const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
 const apiKey = "dd729811ce6821424a00b8b1c99e5884";
 
 //Global variables
+const frag = document.createDocumentFragment();
 //dynamic date
 let date = new Date();
 let newDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
@@ -72,11 +73,48 @@ const updateUI = async () => {
     try {
         const allData = await request.json();
         // adding data to div
-        document.querySelector("#date").innerHTML = allData[0].date;
-        document.querySelector("#temp").innerHTML = allData[0].temp;
-        document.querySelector("#content").innerHTML = allData[0].feelings;
+        const entryHolder = document.querySelector("#entry-holder");
+        allEntries = [];
+        
+        for (i = 0; i < allData.length;i++) {
+            const divs = document.querySelectorAll("#div");
+            const newDiv = document.createElement("div");
+            const newDate = document.createElement("p");
+            const newTemp = document.createElement("p");
+            const newFeeling = document.createElement("p");
+
+            newDiv.setAttribute("id","div");
+            newDiv.setAttribute("class","div"+i);
+            newDate.setAttribute("id","date"+i);
+            newTemp.setAttribute("id","temp"+i);
+            newFeeling.setAttribute("id","feelings"+i);
+
+            newDate.innerHTML = allData[i].date;
+            newTemp.innerHTML = allData[i].temp;
+            newFeeling.innerHTML = allData[i].feelings;
+
+            newDiv.appendChild(newDate);
+            newDiv.appendChild(newTemp);
+            newDiv.appendChild(newFeeling);
+            frag.appendChild(newDiv);
+
+            removeChildren(entryHolder);            
+            entryHolder.appendChild(frag);
+        }
+        
+        
+        return allData;
+        // document.querySelector("#date").innerHTML = allData[0].date;
+        // document.querySelector("#temp").innerHTML = allData[0].temp;
+        // document.querySelector("#content").innerHTML = allData[0].feelings;
     }
     catch(error) {
         console.log("Error", error);
+    }
+}
+
+function removeChildren(parent) {
+    while(parent.lastChild) {
+        parent.removeChild(parent.lastChild);
     }
 }

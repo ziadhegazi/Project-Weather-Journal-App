@@ -89,9 +89,9 @@ const updateUI = async () => {
             newTemp.setAttribute("id","temp"+i);
             newFeeling.setAttribute("id","feelings"+i);
 
-            newDate.innerHTML = allData[i].date;
-            newTemp.innerHTML = allData[i].temp;
-            newFeeling.innerHTML = allData[i].feelings;
+            newDate.innerHTML = `Date: ${allData[i].date}`;
+            newTemp.innerHTML = `Temperature: ${allData[i].temp}`;
+            newFeeling.innerHTML = `Feelings: ${allData[i].feelings}`;
 
             newDiv.appendChild(newDate);
             newDiv.appendChild(newTemp);

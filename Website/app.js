@@ -1,13 +1,13 @@
 //baseURL
 const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
 //API Key
-const apiKey = "dd729811ce6821424a00b8b1c99e5884";
+const apiKey = "&APPID=dd729811ce6821424a00b8b1c99e5884&units=metric";
 
 //Global variables
 const frag = document.createDocumentFragment();
 //dynamic date
 let date = new Date();
-let newDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+let newDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
 
 //Detecting button pressed
 document.querySelector("#generate").addEventListener("click", performAction);
@@ -34,7 +34,7 @@ function performAction(e) {
 const getData = async (url, zipcode, key) => {
     //call API
     const countryCode = document.querySelector("#countryCode").value;
-    const res = await fetch(`${url}${zipcode},${countryCode}&APPID=${key}`)
+    const res = await fetch(`${url}${zipcode},${countryCode}${key}`)
     console.log(res);
 
     try {
@@ -77,7 +77,6 @@ const updateUI = async () => {
         allEntries = [];
         
         for (i = 0; i < allData.length;i++) {
-            const divs = document.querySelectorAll("#div");
             const newDiv = document.createElement("div");
             const newDate = document.createElement("p");
             const newTemp = document.createElement("p");
@@ -104,10 +103,7 @@ const updateUI = async () => {
         
         
         return allData;
-        // document.querySelector("#date").innerHTML = allData[0].date;
-        // document.querySelector("#temp").innerHTML = allData[0].temp;
-        // document.querySelector("#content").innerHTML = allData[0].feelings;
-    }
+        }
     catch(error) {
         console.log("Error", error);
     }

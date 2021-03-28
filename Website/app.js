@@ -73,10 +73,7 @@ const updateUI = async () => {
     try {
         const allData = await request.json();
         // adding data to div
-        const entryHolder = document.querySelector("#entry-holder");
-        allEntries = [];
         
-            const newDiv = document.createElement("div");
             const newDate = document.querySelector("#date");
             const newTemp = document.querySelector("#temp");
             const newFeeling = document.querySelector("#content");

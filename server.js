@@ -26,17 +26,17 @@ const server = app.listen(port, () => {
 });
 
 //endpoint for all routes
-projectData = {};
+const projectData = [];
 
 //GET route
 app.get("/all", getProjectData);
 
 function getProjectData(request,response) {
-    response.send(weatherData);
-    console.log(weatherData);
+    response.send(projectData);
+    console.log(projectData);
 }
 
-const weatherData = [];
+
 // POST route
 app.post("/addData", addProjectData);
 
@@ -47,6 +47,6 @@ function addProjectData(request, response) {
         feelings: request.body.feelings
     }
 
-    weatherData.push(newEntry);
-    response.send(weatherData);
+    projectData.push(newEntry);
+    response.send(projectData);
 }

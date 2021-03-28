@@ -26,7 +26,7 @@ const server = app.listen(port, () => {
 });
 
 //endpoint for all routes
-const projectData = [];
+projectData = {};
 
 //GET route
 app.get("/all", getProjectData);
@@ -45,8 +45,8 @@ function addProjectData(request, response) {
         date: request.body.date,
         temp: request.body.temp,
         feelings: request.body.feelings
-    }
+        }
 
-    projectData.push(newEntry);
+    projectData = newEntry;
     response.send(projectData);
 }

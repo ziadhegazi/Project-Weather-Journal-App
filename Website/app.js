@@ -76,31 +76,14 @@ const updateUI = async () => {
         const entryHolder = document.querySelector("#entry-holder");
         allEntries = [];
         
-        for (i = 0; i < allData.length;i++) {
             const newDiv = document.createElement("div");
-            const newDate = document.createElement("p");
-            const newTemp = document.createElement("p");
-            const newFeeling = document.createElement("p");
+            const newDate = document.querySelector("#date");
+            const newTemp = document.querySelector("#temp");
+            const newFeeling = document.querySelector("#content");
 
-            newDiv.setAttribute("id","div");
-            newDiv.setAttribute("class","div"+i);
-            newDate.setAttribute("id","date"+i);
-            newTemp.setAttribute("id","temp"+i);
-            newFeeling.setAttribute("id","feelings"+i);
-
-            newDate.innerHTML = `Date: ${allData[i].date}`;
-            newTemp.innerHTML = `Temperature: ${allData[i].temp}`;
-            newFeeling.innerHTML = `Feelings: ${allData[i].feelings}`;
-
-            newDiv.appendChild(newDate);
-            newDiv.appendChild(newTemp);
-            newDiv.appendChild(newFeeling);
-            frag.appendChild(newDiv);
-
-            removeChildren(entryHolder);            
-            entryHolder.appendChild(frag);
-        }
-        
+            newDate.innerHTML = (`Date: ${allData.date}`);
+            newTemp.innerHTML = (`Temperature: ${allData.temp}`);
+            newFeeling.innerHTML = (`Feelings: ${allData.feelings}`);
         
         return allData;
         }
